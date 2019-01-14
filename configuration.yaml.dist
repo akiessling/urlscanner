@@ -9,3 +9,5 @@ tests:
   cookies:
     allowed:
       - _gat
+  # tests for anonimize setting
+  google_analytics: ~
