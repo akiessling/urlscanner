@@ -2,7 +2,6 @@ import {TestModule} from "../Interfaces/TestModule";
 import * as _ from "lodash";
 
 export abstract class AbstractTest implements TestModule {
-
     public readonly configurationPath: string = 'needs_implementation';
     public readonly resultPath: string  = 'needs_implementation';
 
@@ -13,8 +12,6 @@ export abstract class AbstractTest implements TestModule {
     }
 
     isEnabled(): boolean {
-        //console.log(this.configurationPath);
-        //console.log(this.configuration);
         return _.has(this.configuration, this.configurationPath);
     }
 

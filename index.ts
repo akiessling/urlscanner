@@ -29,10 +29,11 @@ const activeTests = allTests.filter((test) => {
             // You can access the page object before requests
             await page.setRequestInterception(true);
             page.on('request', request => {
-
-
-                activeTests.forEach((test) => test.runTest(page, request));
-                request.continue();
+                Promise.all(activeTests.map(function (test) {
+                    return test.runTest(page, request);
+                })).then(function () {
+                    request.continue();
+                });
             });
 
             // // The result contains options, links, cookies and etc.
