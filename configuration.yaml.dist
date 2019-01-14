@@ -1,0 +1,11 @@
+urls:
+  - https://example.org
+#  - https://www.example.org
+
+tests:
+  external_requests:
+    allowed_domains:
+      - www.example.net
+  cookies:
+    allowed:
+      - _gat
