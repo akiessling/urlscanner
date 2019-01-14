@@ -4,14 +4,14 @@ import * as _ from "lodash";
 
 export class ExternalRequests extends AbstractTest {
 
-    public readonly configurationPath: string = 'tests.external_requests.allowed_domains';
-    public readonly resultPath: string  = 'external_requests';
+    public readonly configurationPath: string = 'tests.external_requests';
+    public readonly resultPath: string = 'external_requests';
 
     runTest(page, request): void {
-        let urlToTest = new Url(request.url());
-        let originDomain = new Url(page.url()).domain;
+        let urlToTest:Url = new Url(request.url());
+        let origin:Url = new Url(page.url());
 
-        if (urlToTest.domain !== originDomain && !_.includes(this.getConfiguration(), urlToTest.hostname)) {
+        if (urlToTest.hostname !== origin.hostname && !_.includes(this.getConfiguration().allowed_domains, urlToTest.hostname)) {
             let resultObject = this.crawlingResults[request.url()] || [];
             resultObject.push(page.url());
 

@@ -1,7 +1,7 @@
-import {TestModuleInterface} from "../Interfaces/TestModuleInterface";
+import {TestModule} from "../Interfaces/TestModule";
 import * as _ from "lodash";
 
-export abstract class AbstractTest implements TestModuleInterface {
+export abstract class AbstractTest implements TestModule {
 
     public readonly configurationPath: string = 'needs_implementation';
     public readonly resultPath: string  = 'needs_implementation';

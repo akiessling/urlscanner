@@ -1,4 +1,4 @@
-import {TestModuleInterface} from "./Modules/Interfaces/TestModuleInterface";
+import {TestModule} from "./Modules/Interfaces/TestModule";
 import * as yaml from "js-yaml";
 import * as HCCrawler from "headless-chrome-crawler";
 import * as fs from "fs";
@@ -11,7 +11,7 @@ if (!configuration.urls || configuration.urls.length === 0) {
     throw new Error("no urls configured");
 }
 
-const allTests: Array<TestModuleInterface> = [
+const allTests: Array<TestModule> = [
     new ExternalRequests(configuration),
     new Cookies(configuration)
 ];
@@ -29,6 +29,8 @@ const activeTests = allTests.filter((test) => {
             // You can access the page object before requests
             await page.setRequestInterception(true);
             page.on('request', request => {
+
+
                 activeTests.forEach((test) => test.runTest(page, request));
                 request.continue();
             });

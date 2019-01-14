@@ -5,22 +5,18 @@ import * as _ from "lodash";
 
 export class Cookies extends AbstractTest {
 
-    public readonly configurationPath: string = 'tests.cookies.allowed';
+    public readonly configurationPath: string = 'tests.cookies';
     public readonly resultPath: string  = 'cookies';
 
     async runTest(page, request) {
-        // let cookies = await page.cookies();
-
-        const allowedCookies = this.getConfiguration();
+        const allowedCookies = this.getConfiguration().allowed;
 
         try {
             let result = await page._client.send('Network.getAllCookies');
             let cookies: Cookie[] = result.cookies || [];
             if (cookies.length > 0)
             {
-            console.log(cookies);
                 cookies.forEach((cookie) => {
-                    console.log(" testing " + cookie.name);
                     if (!_.includes(allowedCookies, cookie.name)) {
 
                         this.crawlingResults[cookie.name] = this.crawlingResults[cookie.name] || [];
