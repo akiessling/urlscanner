@@ -18,21 +18,6 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@nesk/puphpeteer@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@nesk/puphpeteer/-/puphpeteer-1.4.1.tgz#4000f43bfd6d9b8c134607feff785bc4ae3ed383"
-  integrity sha512-/mx6Q0yr3nYNQ+rNpxbwtsTR0z+1yqZwg+clxkqnUtRv4X2LH5r9KiBJh+deSXZjjddMLSP6/f9KVXFLA60jRg==
-  dependencies:
-    "@nesk/rialto" "^1.2.1"
-    puppeteer "~1.10.0"
-
-"@nesk/rialto@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@nesk/rialto/-/rialto-1.2.1.tgz#d02e05c4b062f035ef6e0d2af0fb93daa83b162e"
-  integrity sha512-+fWtjF1RlNe6u+V4QAfMRJ+7J7eBoM92AbDp6DLCfAcVjjyHU4xi4gh0+Yeum1K6VIkrqNzTvQBcjoZkUkwtZQ==
-  dependencies:
-    lodash "^4.17.10"
-
 "@types/lodash@^4.14.119":
   version "4.14.119"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.119.tgz#be847e5f4bc3e35e46d041c394ead8b603ad8b39"
@@ -42,6 +27,11 @@
   version "10.12.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
+
+"@types/query-string@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@types/query-string/-/query-string-6.2.0.tgz#ac1903ab175de7fd4a7bb703964c297eebddc8f7"
+  integrity sha512-dnYqKg7eZ+t7ZhCuBtwLxjqON8yXr27hiu3zXfPqxfJSbWUZNwwISE0BJUxghlcKsk4lZSp7bdFSJBJVNWBfmA==
 
 "@types/url-parse@^1.4.2":
   version "1.4.2"
@@ -1461,20 +1451,6 @@ puppeteer@^1.11.0:
     proxy-from-env "^1.0.0"
     rimraf "^2.6.1"
     ws "^6.1.0"
-
-puppeteer@~1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.10.0.tgz#e3005f1251c2feae0e10c0f7a35afbcd56589ceb"
-  integrity sha512-3i28X/ucX8t3eL4TZA60FLMOQNKqudFSOGDHr0cT7T4dE027CrcS885aAqjdxNybhMPliM5yImNsKJ6SQrPzhw==
-  dependencies:
-    debug "^3.1.0"
-    extract-zip "^1.6.6"
-    https-proxy-agent "^2.2.1"
-    mime "^2.0.3"
-    progress "^2.0.0"
-    proxy-from-env "^1.0.0"
-    rimraf "^2.6.1"
-    ws "^5.1.1"
 
 qs@~6.5.1:
   version "6.5.2"

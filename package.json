@@ -4,8 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@nesk/puphpeteer": "^1.4.1",
-    "@types/url-parse": "^1.4.2",
     "headless-chrome-crawler": "^1.8.0",
     "js-yaml": "^3.12.1",
     "lodash": "^4.17.11",
@@ -17,6 +15,8 @@
   "devDependencies": {
     "@types/lodash": "^4.14.119",
     "@types/node": "^10.12.18",
+    "@types/query-string": "^6.2.0",
+    "@types/url-parse": "^1.4.2",
     "eslint": "^5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",

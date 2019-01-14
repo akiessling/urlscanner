@@ -4,6 +4,7 @@ import * as HCCrawler from "headless-chrome-crawler";
 import * as fs from "fs";
 import {Cookies} from "./Modules/Tests/Cookies";
 import {ExternalRequests} from "./Modules/Tests/ExternalRequests";
+import {GoogleAnalytics} from "./Modules/Tests/GoogleAnalytics";
 
 const configuration = yaml.safeLoad(fs.readFileSync('configuration.yaml', 'utf8'));
 
@@ -13,7 +14,8 @@ if (!configuration.urls || configuration.urls.length === 0) {
 
 const allTests: Array<TestModule> = [
     new ExternalRequests(configuration),
-    new Cookies(configuration)
+    new Cookies(configuration),
+    new GoogleAnalytics(configuration),
 ];
 
 const activeTests = allTests.filter((test) => {
