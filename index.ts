@@ -5,6 +5,8 @@ import * as fs from "fs";
 import {Cookies} from "./Modules/Tests/Cookies";
 import {ExternalRequests} from "./Modules/Tests/ExternalRequests";
 import {GoogleAnalytics} from "./Modules/Tests/GoogleAnalytics";
+import {JavaScript} from "./Modules/Tests/JavaScript";
+import {OnPage} from "./Modules/Tests/OnPage";
 
 const configuration = yaml.safeLoad(fs.readFileSync('configuration.yaml', 'utf8'));
 
@@ -16,6 +18,8 @@ const allTests: Array<TestModule> = [
     new ExternalRequests(configuration),
     new Cookies(configuration),
     new GoogleAnalytics(configuration),
+    new JavaScript(configuration),
+    new OnPage(configuration),
 ];
 
 const activeTests = allTests.filter((test) => {
@@ -30,11 +34,37 @@ const activeTests = allTests.filter((test) => {
         customCrawl: async (page, crawl) => {
             // You can access the page object before requests
             await page.setRequestInterception(true);
+
             page.on('request', request => {
                 Promise.all(activeTests.map(function (test) {
-                    return test.runTest(page, request);
+                    if (test.isEnabledForStage('request')) {
+                        return test.runTest(page, request);
+                    }
+                    return;
                 })).then(function () {
                     request.continue();
+                });
+            });
+
+            page.on('console', msg => {
+                Promise.all(activeTests.map(function (test) {
+                    if (test.isEnabledForStage('console')) {
+                        return test.runTest(page, msg);
+                    }
+                    return;
+                })).then(function () {
+                    return;
+                });
+            });
+
+            page.on('load', () => {
+                Promise.all(activeTests.map(function (test) {
+                    if (test.isEnabledForStage('load')) {
+                        return test.runTest(page, null);
+                    }
+                    return;
+                })).then(function () {
+                    return;
                 });
             });
 

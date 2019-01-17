@@ -33,4 +33,8 @@ export class Cookies extends AbstractTest {
             console.log(e.message);
         }
     }
+
+    isEnabledForStage(stage) {
+        return stage === 'request';
+    }
 }

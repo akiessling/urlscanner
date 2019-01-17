@@ -11,3 +11,6 @@ tests:
       - _gat
   # tests for anonimize setting
   google_analytics: ~
+    id: 'UA-12345678-9'
+  javascript: ~
+  onpage: ~

@@ -18,4 +18,9 @@ export class ExternalRequests extends AbstractTest {
             this.crawlingResults[request.url()] = resultObject;
         }
     }
+
+    isEnabledForStage(stage) {
+        return stage === 'request';
+    }
+
 }

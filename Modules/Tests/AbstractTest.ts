@@ -25,6 +25,8 @@ export abstract class AbstractTest implements TestModule {
         };
     }
 
+    abstract isEnabledForStage(stage);
+
     async abstract runTest(page, request);
 
 }
