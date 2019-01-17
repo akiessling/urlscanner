@@ -11,7 +11,8 @@ export class ExternalRequests extends AbstractTest {
         let urlToTest:Url = new Url(request.url());
         let origin:Url = new Url(page.url());
 
-        if (urlToTest.hostname !== origin.hostname && !_.includes(this.getConfiguration().allowed_domains, urlToTest.hostname)) {
+        const allowedDomains = _.get(this.getConfiguration(), 'allowed_domains', []) ;
+        if (urlToTest.hostname !== origin.hostname && !_.includes(allowedDomains, urlToTest.hostname)) {
             let resultObject = this.crawlingResults[request.url()] || [];
             resultObject.push(page.url());
 

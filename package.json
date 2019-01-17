@@ -17,6 +17,8 @@
     "@types/node": "^10.12.18",
     "@types/query-string": "^6.2.0",
     "@types/url-parse": "^1.4.2",
+    "ava": "^1.1.0",
+    "ava-ts": "^0.25.2",
     "eslint": "^5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
@@ -24,5 +26,18 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
     "prettier": "^1.15.3"
+  },
+  "scripts": {
+    "test": "ava-ts",
+    "test-verbose": "ava-ts -v"
+  },
+  "ava-ts": {
+    "files": [
+      "test/**.test.js"
+    ],
+    "timeout": "10s",
+    "failFast": false,
+    "failWithoutAssertions": true,
+    "powerAssert": true
   }
 }
