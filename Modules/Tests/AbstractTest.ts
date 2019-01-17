@@ -25,6 +25,11 @@ export abstract class AbstractTest implements TestModule {
         };
     }
 
+    addResult(group, message) {
+        this.crawlingResults[group] = this.crawlingResults[group] || [];
+        this.crawlingResults[group].push(message);
+    }
+
     async abstract runTest(page, request);
 
 }

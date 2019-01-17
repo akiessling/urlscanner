@@ -1,7 +1,7 @@
 import test from "ava";
 import {ExternalRequests} from "../../Modules/Tests/ExternalRequests";
 
-test('foo', t => {
+test('valid request', t => {
 
     let configuration = {};
     let externalRequest = new ExternalRequests(configuration);
