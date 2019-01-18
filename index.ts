@@ -5,6 +5,7 @@ import * as fs from "fs";
 import {Cookies} from "./Modules/Tests/Cookies";
 import {ExternalRequests} from "./Modules/Tests/ExternalRequests";
 import {GoogleAnalytics} from "./Modules/Tests/GoogleAnalytics";
+import {GoogleTagManager} from "./Modules/Tests/GoogleTagManager";
 
 const configuration = yaml.safeLoad(fs.readFileSync('configuration.yaml', 'utf8'));
 
@@ -16,6 +17,7 @@ const allTests: Array<TestModule> = [
     new ExternalRequests(configuration),
     new Cookies(configuration),
     new GoogleAnalytics(configuration),
+    new GoogleTagManager(configuration),
 ];
 
 const activeTests = allTests.filter((test) => {

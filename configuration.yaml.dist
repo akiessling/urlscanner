@@ -9,6 +9,8 @@ tests:
   cookies:
     allowed:
       - _gat
-  # tests for anonimize setting
+  # tests for anonymize setting
   google_analytics:
     id: 'UA-12345678-9'
+  google_tag_manager:
+    id: 'GTM-ABCDEF12'
