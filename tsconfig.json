@@ -7,10 +7,6 @@
     "preserveSymlinks": false,
     "moduleResolution": "node",
     "baseUrl": "./",
-    "paths": {
-      "*": [ "node_modules/@types/*", "*"]
-    },
-    "typeRoots": ["./node_module/@types"],
     "module": "CommonJS",
     "target": "ES2017",
 

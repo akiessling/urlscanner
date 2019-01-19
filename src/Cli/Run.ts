@@ -4,8 +4,12 @@ import {ExternalRequests} from "../Modules/Tests/ExternalRequests";
 import {Cookies} from "../Modules/Tests/Cookies";
 import {GoogleAnalytics} from "../Modules/Tests/GoogleAnalytics";
 import * as HCCrawler from "headless-chrome-crawler";
+
 import * as yaml from "js-yaml";
 import * as fs from "fs";
+import ora = require("ora");
+import {Page} from "puppeteer";
+
 
 export const command: string = 'run';
 export const desc: string = 'Create or generate new serverless resources';
@@ -24,9 +28,9 @@ export const builder = (yargs: Argv) =>
             default: 'results.yaml'
         });
 
-
-
 export function handler (argv) {
+
+    let totalCrawled = 0;
 
     if (!fs.existsSync(argv.config)) {
         throw new TypeError(`Config file ${argv.config} does not exist`);
@@ -49,12 +53,12 @@ export function handler (argv) {
         return test.isEnabled();
     });
 
-// console.log(activeTests);
+    const spinner = ora('Loading pages').start();
 
     (async () => {
         const crawler = await HCCrawler.launch({
 
-            customCrawl: async (page, crawl) => {
+            customCrawl: async (page: Page, crawl) => {
                 // You can access the page object before requests
                 await page.setRequestInterception(true);
                 page.on('request', request => {
@@ -73,6 +77,11 @@ export function handler (argv) {
                 return result;
             },
 
+            onSuccess: (result => {
+                totalCrawled++;
+                spinner.text = `Total crawled: ${totalCrawled}`;
+            }),
+
             maxDepth: 0,
         });
 
@@ -80,6 +89,9 @@ export function handler (argv) {
 
         await crawler.onIdle(); // Resolved when no queue is left
         await crawler.close(); // Close the crawler
+
+        spinner.succeed(`Crawling done, saving results for ${totalCrawled} pages`);
+
 
         let crawlingResults = {results: activeTests.map((test) => test.getResults())};
         // console.log(crawlingResults);
