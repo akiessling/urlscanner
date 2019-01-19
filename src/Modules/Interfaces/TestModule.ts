@@ -1,6 +1,8 @@
 export interface TestModule {
+    configurationPath: string;
+
     isEnabled(): boolean;
-    getConfiguration(): Array<object>;
+    getConfiguration(): {};
     runTest(page, request): void;
     getResults(): Object;
 }
