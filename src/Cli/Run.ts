@@ -42,8 +42,7 @@ export function handler (argv) {
         throw new Error("no urls configured");
     }
 
-
-    const allTests: Array<TestModule> = [
+    const allTests: TestModule[] = [
         new ExternalRequests(configuration),
         new Cookies(configuration),
         new GoogleAnalytics(configuration),
