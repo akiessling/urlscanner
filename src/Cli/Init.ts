@@ -3,8 +3,8 @@ import * as process from "process";
 import * as path from "path";
 import {Argv} from "yargs";
 
-export const command = 'init [dir]';
-export const desc = 'Create an empty repo';
+export const command = 'init';
+export const desc = 'Copy example configuration file to current directory';
 export const builder = (yargs: Argv) =>
     yargs.usage('Usage: $0 run [Options]')
         .option(

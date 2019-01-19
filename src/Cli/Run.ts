@@ -11,8 +11,8 @@ import ora = require("ora");
 import {Page} from "puppeteer";
 
 
-export const command: string = 'run';
-export const desc: string = 'Create or generate new serverless resources';
+export const command: string = 'run [-c configuration.yaml] [-o results.yaml]';
+export const desc: string = 'Run test with given config file';
 
 export const builder = (yargs: Argv) =>
     yargs.usage('Usage: $0 run [Options]')
@@ -33,7 +33,7 @@ export function handler (argv) {
     let totalCrawled = 0;
 
     if (!fs.existsSync(argv.config)) {
-        throw new TypeError(`Config file ${argv.config} does not exist`);
+        throw new TypeError(`Config file ${argv.config} does not exist, run init to generate one`);
     }
 
     const configuration = yaml.safeLoad(fs.readFileSync(argv.config, 'utf8'));
@@ -97,7 +97,7 @@ export function handler (argv) {
         // console.log(crawlingResults);
 
         let yamlOut = yaml.safeDump(crawlingResults);
-        fs.writeFileSync('out.yaml', yamlOut);
+        fs.writeFileSync(argv.output, yamlOut);
 
     })();
 }
