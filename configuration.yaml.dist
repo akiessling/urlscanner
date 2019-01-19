@@ -2,6 +2,10 @@ urls:
   - https://example.org
 #  - https://www.example.org
 
+crawler:
+  options:
+    userAgent: Custom Crawler Engine
+
 tests:
   external_requests:
     allowed_domains:
