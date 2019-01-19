@@ -1,9 +1,37 @@
 # Usage
 
-Copy `configuration.yaml.dist` to `configuration.yaml` and add configuration. 
+## Development
 
-Run with 
+Clone repo, run yarn or npm install.
 
+Run this command, to see available options: 
 ```
-npx ts-node index.js
+npx ts-node src/cli.ts
+```
+
+### Create new config, optionally supply target yaml file
+```
+npx ts-node src/cli.ts init [-c configuration.yaml]
+```
+
+### Run test, optionally with config file path and output file path
+```
+npx ts-node src/cli.ts run [-c configuration.yaml] [-o output.yaml]
+```
+
+
+## Production / Compiling
+
+Compile the TypeScript code by invoking `tsc` in the root directory.
+Now run `npm link` to globally install the urlscanner.
+Now you can run anywhere
+
+### init
+```
+urlscanner init [-c configuration.yaml]
+```
+
+### run
+```
+urlscanner run [-c configuration.yaml] [-o output.yaml]
 ```
