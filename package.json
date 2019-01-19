@@ -41,9 +41,6 @@
     "test-verbose": "ava-ts -v"
   },
   "ava-ts": {
-    "files": [
-      "test/**.test.js"
-    ],
     "timeout": "10s",
     "failFast": false,
     "failWithoutAssertions": true,
