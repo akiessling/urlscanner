@@ -1,5 +1,21 @@
 {
   "compilerOptions": {
-    "lib": ["es2015"]
+
+    "types": [
+        "node"
+    ],
+    "preserveSymlinks": false,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "*": [ "node_modules/@types/*", "*"]
+    },
+    "typeRoots": ["./node_module/@types"],
+    "module": "CommonJS",
+    "target": "ES2017",
+
+    "declaration": true,
+    "rootDir" : "./src",
+    "outDir": "./dist"
   }
 }
