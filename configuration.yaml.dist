@@ -3,6 +3,7 @@ urls:
 #  - https://www.example.org
 
 crawler:
+  # see https://github.com/yujiosaka/headless-chrome-crawler/blob/master/docs/API.md#crawlerqueueoptions
   options:
     userAgent: Custom Crawler Engine
 
