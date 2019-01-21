@@ -1,10 +1,10 @@
 import test from "ava";
-import {GoogleAnalytics} from "../../Modules/Tests/GoogleAnalytics";
+import {GoogleAnalyticsAnonymizeIp} from "../../Modules/Tests/GoogleAnalytics/GoogleAnalyticsAnonymizeIp";
 
 test('detect missing anonymize param', t => {
 
     let configuration = {};
-    let externalRequest = new GoogleAnalytics(configuration);
+    let externalRequest = new GoogleAnalyticsAnonymizeIp(configuration);
 
     const pageUrl = 'http://example.org/';
 
@@ -37,7 +37,7 @@ test('detect missing anonymize param', t => {
 test('detect wrong anonymize parameter', t => {
 
     let configuration = {};
-    let externalRequest = new GoogleAnalytics(configuration);
+    let externalRequest = new GoogleAnalyticsAnonymizeIp(configuration);
 
     const pageUrl = 'http://example.org/';
 
@@ -70,7 +70,7 @@ test('detect wrong anonymize parameter', t => {
 test('detect proper anonymize parameter', t => {
 
     let configuration = {};
-    let externalRequest = new GoogleAnalytics(configuration);
+    let externalRequest = new GoogleAnalyticsAnonymizeIp(configuration);
 
     const pageUrl = 'http://example.org/';
 

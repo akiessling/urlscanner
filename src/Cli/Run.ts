@@ -2,7 +2,6 @@ import { Argv } from "yargs";
 import { TestModule } from "../Modules/Interfaces/TestModule";
 import { ExternalRequests } from "../Modules/Tests/ExternalRequests";
 import { Cookies } from "../Modules/Tests/Cookies";
-import { GoogleAnalytics } from "../Modules/Tests/GoogleAnalytics";
 import * as HCCrawler from "headless-chrome-crawler";
 
 import * as yaml from "js-yaml";
@@ -10,6 +9,8 @@ import * as fs from "fs";
 import ora = require("ora");
 import { Page } from "puppeteer";
 import { Configuration } from "../Puppeteer/Configuration";
+import {GoogleAnalyticsAnonymizeIp} from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsAnonymizeIp";
+import {GoogleAnalyticsId} from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsId";
 
 export const command: string = "run [-c configuration.yaml] [-o results.yaml]";
 export const desc: string = "Run test with given config file";
@@ -53,7 +54,8 @@ export function handler(argv) {
   const allTests: TestModule[] = [
     new ExternalRequests(configuration),
     new Cookies(configuration),
-    new GoogleAnalytics(configuration)
+    new GoogleAnalyticsAnonymizeIp(configuration),
+    new GoogleAnalyticsId(configuration)
   ];
 
   const activeTests = allTests.filter(test => {
