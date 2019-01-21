@@ -20,3 +20,4 @@ tests:
     id: 'GTM-12345'
   javascript_errors: ~
   seo: ~
+  failed_requests: ~
