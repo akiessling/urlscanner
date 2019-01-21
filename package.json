@@ -3,20 +3,29 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "urlscanner": "./dist/cli.js"
+  },
   "dependencies": {
     "headless-chrome-crawler": "^1.8.0",
     "js-yaml": "^3.12.1",
     "lodash": "^4.17.11",
+    "ora": "^3.0.0",
     "puppeteer": "^1.11.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2",
-    "url-parse": "^1.4.4"
+    "url-parse": "^1.4.4",
+    "yargs": "^12.0.5"
   },
   "devDependencies": {
+    "@types/js-yaml": "^3.12.0",
     "@types/lodash": "^4.14.119",
     "@types/node": "^10.12.18",
+    "@types/ora": "^3.0.0",
+    "@types/puppeteer": "^1.11.1",
     "@types/query-string": "^6.2.0",
     "@types/url-parse": "^1.4.2",
+    "@types/yargs": "^12.0.5",
     "ava": "^1.1.0",
     "ava-ts": "^0.25.2",
     "eslint": "^5.12.0",
@@ -32,9 +41,6 @@
     "test-verbose": "ava-ts -v"
   },
   "ava-ts": {
-    "files": [
-      "test/**.test.js"
-    ],
     "timeout": "10s",
     "failFast": false,
     "failWithoutAssertions": true,
