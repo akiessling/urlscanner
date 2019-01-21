@@ -78,7 +78,7 @@ export function handler(argv) {
           } else {
             Promise.all(
               activeTests.map(test => {
-                test.runTest(page, request);
+                test.runOnRequest(page, request);
               })
             ).then(function() {
               request.continue();

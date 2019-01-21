@@ -5,11 +5,7 @@ import * as URLParse from "url-parse";
 
 export class GoogleAnalyticsAnonymizeIp extends AbstractGoogleAnalytics {
 
-
-
-
-
-    async runTest(page, request): Promise<any> {
+    async runOnRequest(page, request): Promise<any> {
         if (this.urlCondition.test(request.url())) {
             const urlToTest = new URLParse(request.url(), true);
 
