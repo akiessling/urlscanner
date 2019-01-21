@@ -8,7 +8,7 @@ export class Cookies extends AbstractTest {
     public readonly configurationPath: string = 'tests.cookies';
     public readonly resultPath: string  = 'cookies';
 
-    async runTest(page, request) {
+    async runOnRequest(page, request): Promise<any> {
         const allowedCookies = this.getConfiguration().allowed;
 
         try {
