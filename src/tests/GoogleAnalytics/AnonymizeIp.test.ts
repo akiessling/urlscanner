@@ -21,7 +21,7 @@ test('detect missing anonymize param', t => {
         }
     };
 
-    externalRequest.runTest(page, request);
+    externalRequest.runOnRequest(page, request);
 
     let result = externalRequest.getResults();
 
@@ -54,7 +54,7 @@ test('detect wrong anonymize parameter', t => {
         }
     };
 
-    externalRequest.runTest(page, request);
+    externalRequest.runOnRequest(page, request);
 
     let result = externalRequest.getResults();
 
@@ -87,7 +87,7 @@ test('detect proper anonymize parameter', t => {
         }
     };
 
-    externalRequest.runTest(page, request);
+    externalRequest.runOnRequest(page, request);
 
     let result = externalRequest.getResults();
 

@@ -13,14 +13,14 @@ export class GoogleTagManagerId extends AbstractTest {
         if (this.urlCondition.test(request.url())) {
             const urlToTest = new URLParse(request.url(), true);
 
-            const configuredTagManagerId = this.getConfiguration('id');
+            const validTagManagerIds = this.getConfiguration('validIds');
             let actualTagManagerId = _.get(urlToTest, "query.id");
 
             // check for correct analytics-id
-            if (configuredTagManagerId && actualTagManagerId && actualTagManagerId !== configuredTagManagerId) {
+            if (validTagManagerIds.length > 0 && actualTagManagerId &&  validTagManagerIds.includes(actualTagManagerId) === false) {
                 this.addResult(
                     "Wrong TagManager-Id",
-                    `${actualTagManagerId} instead of ${configuredTagManagerId} on ${page.url()}`
+                    `${actualTagManagerId} on ${page.url()}`
                 );
             }
         }

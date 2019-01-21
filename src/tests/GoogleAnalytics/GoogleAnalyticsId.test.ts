@@ -6,7 +6,7 @@ test('detect wrong Google Analytics ID', t => {
     let configuration = {
         tests: {
             google_analytics: {
-                id: 'UA-12345678-9'
+                validIds: ['UA-12345678-9']
             }
         }
     };
@@ -27,14 +27,14 @@ test('detect wrong Google Analytics ID', t => {
         }
     };
 
-    tester.runTest(page, request);
+    tester.runOnRequest(page, request);
 
     let result = tester.getResults();
 
     t.deepEqual(result, {
         [tester.resultPath]: {
             ['Wrong Analytics-Id']: [
-                'foobar instead of UA-12345678-9 on http://example.org/',
+                'foobar on http://example.org/',
             ],
         }
     });
@@ -45,7 +45,7 @@ test('detect proper Google Analytics ID', t => {
     let configuration = {
         tests: {
             google_analytics: {
-                id: 'UA-12345678-9'
+                validIds: ['UA-12345678-9']
             }
         }
     };
@@ -59,14 +59,14 @@ test('detect proper Google Analytics ID', t => {
         }
     };
 
-    const requestUrl = `https://www.google-analytics.com/r/collect/?aip=1&tid=${configuration.tests.google_analytics.id}`;
+    const requestUrl = `https://www.google-analytics.com/r/collect/?aip=1&tid=${configuration.tests.google_analytics.validIds[0]}`;
     let request = {
         url() {
             return requestUrl;
         }
     };
 
-    tester.runTest(page, request);
+    tester.runOnRequest(page, request);
 
     let result = tester.getResults();
 
