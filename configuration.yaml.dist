@@ -15,9 +15,11 @@ tests:
     allowed:
       - _gat
   google_analytics:
-    id: 'UA-12345678-9'
+    validIds:
+      - 'UA-12345678-9'
   google_tagmanager:
-    id: 'GTM-12345'
+    validIds:
+      - 'GTM-12345'
   javascript_errors: ~
   seo: ~
   failed_requests: ~

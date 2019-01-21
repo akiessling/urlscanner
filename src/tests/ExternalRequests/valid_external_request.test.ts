@@ -1,5 +1,5 @@
 import test from "ava";
-import {ExternalRequests} from "../../Modules/Tests/ExternalRequests";
+import { AllowedExternalRequests } from "../../Modules/Tests/NetworkTraffic/AllowedExternalRequests";
 
 test('valid external request', t => {
 
@@ -10,7 +10,7 @@ test('valid external request', t => {
             }
         }
     };
-    let externalRequest = new ExternalRequests(configuration);
+    let externalRequest = new AllowedExternalRequests(configuration);
 
     const pageUrl = 'https://foo.bar';
 
@@ -27,7 +27,7 @@ test('valid external request', t => {
         }
     };
 
-    externalRequest.runTest(page, request);
+    externalRequest.runOnRequest(page, request);
 
     let result = externalRequest.getResults();
 
