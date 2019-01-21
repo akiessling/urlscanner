@@ -82,8 +82,9 @@ export function handler(argv) {
       customCrawl: async (page: Page, crawl) => {
         // You can access the page object before requests
         await page.setRequestInterception(true);
+
         page.on("request", request => {
-          if (page.url() === "about:blank") {
+          if (request.isNavigationRequest()) {
             request.continue();
           } else {
             Promise.all(
@@ -139,6 +140,10 @@ export function handler(argv) {
       onSuccess: result => {
         totalCrawled++;
         spinner.text = `Total crawled: ${totalCrawled}`;
+      },
+
+      onError: error => {
+        console.log(error);
       },
 
       maxDepth: 0
