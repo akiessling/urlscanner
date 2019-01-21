@@ -1,9 +1,9 @@
-import {AbstractTest} from "./AbstractTest";
+import {AbstractTest} from "../AbstractTest";
 
-import {Cookie} from "../Interfaces/Cookie";
+import {Cookie} from "../../Interfaces/Cookie";
 import * as _ from "lodash";
 
-export class Cookies extends AbstractTest {
+export class AllowedCookies extends AbstractTest {
 
     public readonly configurationPath: string = 'tests.cookies';
     public readonly resultPath: string  = 'cookies';
