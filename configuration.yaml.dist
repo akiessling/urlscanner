@@ -1,8 +1,13 @@
 urls:
-  - https://example.org
-#  - https://www.example.org
+  -
+    url: https://example.org
+    # required to limit crawling to this domain
+    allowedDomains:
+      - example.org
 
 crawler:
+  # defaults to 0, thus only crawls the given urls and does not crawl any deeper
+  maxDepth: 3
   # see https://github.com/yujiosaka/headless-chrome-crawler/blob/master/docs/API.md#crawlerqueueoptions
   options:
     userAgent: Custom Crawler Engine

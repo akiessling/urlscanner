@@ -54,7 +54,7 @@ export function handler(argv) {
   let totalCrawled = 0;
 
   const configuration = getConfiguration(argv);
-  const puppeteerConfiguration = new Configuration(configuration);
+  const crawlerConfiguration = new Configuration(configuration);
 
   const allTests: TestModule[] = [
     new AllowedExternalRequests(configuration),
@@ -77,7 +77,7 @@ export function handler(argv) {
   (async () => {
     const crawler = await HCCrawler.launch({
       preRequest(options) {
-        return puppeteerConfiguration.applyOptions(options);
+        return crawlerConfiguration.applyOptions(options);
       },
       customCrawl: async (page: Page, crawl) => {
         // You can access the page object before requests
@@ -146,7 +146,7 @@ export function handler(argv) {
         console.log(error);
       },
 
-      maxDepth: 0
+      maxDepth: crawlerConfiguration.maxDepth
     });
 
     await crawler.queue(configuration.urls);
