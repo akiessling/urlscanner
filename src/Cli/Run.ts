@@ -9,8 +9,9 @@ import * as fs from "fs";
 import ora = require("ora");
 import { Page } from "puppeteer";
 import { Configuration } from "../Puppeteer/Configuration";
-import {GoogleAnalyticsAnonymizeIp} from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsAnonymizeIp";
-import {GoogleAnalyticsId} from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsId";
+import { GoogleAnalyticsAnonymizeIp } from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsAnonymizeIp";
+import { GoogleAnalyticsId } from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsId";
+import { JavaScriptErrors } from "../Modules/Tests/Errors/JavaScriptErrors";
 
 export const command: string = "run [-c configuration.yaml] [-o results.yaml]";
 export const desc: string = "Run test with given config file";
@@ -55,7 +56,8 @@ export function handler(argv) {
     new ExternalRequests(configuration),
     new Cookies(configuration),
     new GoogleAnalyticsAnonymizeIp(configuration),
-    new GoogleAnalyticsId(configuration)
+    new GoogleAnalyticsId(configuration),
+    new JavaScriptErrors(configuration)
   ];
 
   const activeTests = allTests.filter(test => {
@@ -84,6 +86,14 @@ export function handler(argv) {
               request.continue();
             });
           }
+        });
+
+        page.on("pageerror", error => {
+            Promise.all(
+              activeTests.map(test => {
+                test.runOnPageError(page, error);
+              })
+            );
         });
 
         // // The result contains options, links, cookies and etc.
