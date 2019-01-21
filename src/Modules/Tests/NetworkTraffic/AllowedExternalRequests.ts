@@ -1,8 +1,8 @@
-import {AbstractTest} from "./AbstractTest";
+import {AbstractTest} from "../AbstractTest";
 import * as Url from "url-parse";
 import * as _ from "lodash";
 
-export class ExternalRequests extends AbstractTest {
+export class AllowedExternalRequests extends AbstractTest {
 
     public readonly configurationPath: string = 'tests.external_requests';
     public readonly resultPath: string = 'external_requests';

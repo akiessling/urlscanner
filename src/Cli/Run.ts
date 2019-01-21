@@ -1,7 +1,7 @@
 import { Argv } from "yargs";
 import { TestModule } from "../Modules/Interfaces/TestModule";
-import { ExternalRequests } from "../Modules/Tests/ExternalRequests";
-import { Cookies } from "../Modules/Tests/Cookies";
+import { AllowedExternalRequests } from "../Modules/Tests/NetworkTraffic/AllowedExternalRequests";
+import { AllowedCookies } from "../Modules/Tests/Cookies/AllowedCookies";
 import * as HCCrawler from "headless-chrome-crawler";
 
 import * as yaml from "js-yaml";
@@ -12,6 +12,8 @@ import { Configuration } from "../Puppeteer/Configuration";
 import { GoogleAnalyticsAnonymizeIp } from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsAnonymizeIp";
 import { GoogleAnalyticsId } from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsId";
 import { JavaScriptErrors } from "../Modules/Tests/Errors/JavaScriptErrors";
+import { GoogleTagManagerId } from "../Modules/Tests/GoogleTagManager/GoogleTagManagerId";
+import { ValidPageTitle } from "../Modules/Tests/Seo/ValidPageTitle";
 
 export const command: string = "run [-c configuration.yaml] [-o results.yaml]";
 export const desc: string = "Run test with given config file";
@@ -53,11 +55,13 @@ export function handler(argv) {
   const puppeteerConfiguration = new Configuration(configuration);
 
   const allTests: TestModule[] = [
-    new ExternalRequests(configuration),
-    new Cookies(configuration),
+    new AllowedExternalRequests(configuration),
+    new AllowedCookies(configuration),
     new GoogleAnalyticsAnonymizeIp(configuration),
     new GoogleAnalyticsId(configuration),
-    new JavaScriptErrors(configuration)
+    new GoogleTagManagerId(configuration),
+    new JavaScriptErrors(configuration),
+    new ValidPageTitle(configuration)
   ];
 
   const activeTests = allTests.filter(test => {
@@ -92,6 +96,14 @@ export function handler(argv) {
             Promise.all(
               activeTests.map(test => {
                 test.runOnPageError(page, error);
+              })
+            );
+        });
+
+        page.on("load", () => {
+            Promise.all(
+              activeTests.map(test => {
+                test.runOnPageLoad(page);
               })
             );
         });
