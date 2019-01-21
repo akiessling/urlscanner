@@ -4,18 +4,18 @@ import * as URLParse from "url-parse";
 
 export class GoogleAnalyticsId extends AbstractGoogleAnalytics {
 
-    async runTest(page, request) {
+    async runOnRequest(page, request): Promise<any> {
         if (this.urlCondition.test(request.url())) {
             const urlToTest = new URLParse(request.url(), true);
 
-            const configuredAnalyticsId = this.getConfiguration('id');
+            const validAnalyticsIds = this.getConfiguration('validIds');
             let actualAnalyticsId = _.get(urlToTest, "query.tid");
 
             // check for correct analytics-id
-            if (configuredAnalyticsId && actualAnalyticsId && actualAnalyticsId !== configuredAnalyticsId) {
+            if (validAnalyticsIds.length > 0 && actualAnalyticsId && validAnalyticsIds.includes(actualAnalyticsId) === false) {
                 this.addResult(
                     "Wrong Analytics-Id",
-                    `${actualAnalyticsId} instead of ${configuredAnalyticsId} on ${page.url()}`
+                    `${actualAnalyticsId} on ${page.url()}`
                 );
             }
         }

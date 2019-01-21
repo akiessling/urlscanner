@@ -1,14 +1,14 @@
-import {AbstractTest} from "./AbstractTest";
+import {AbstractTest} from "../AbstractTest";
 
-import {Cookie} from "../Interfaces/Cookie";
+import {Cookie} from "../../Interfaces/Cookie";
 import * as _ from "lodash";
 
-export class Cookies extends AbstractTest {
+export class AllowedCookies extends AbstractTest {
 
     public readonly configurationPath: string = 'tests.cookies';
     public readonly resultPath: string  = 'cookies';
 
-    async runTest(page, request) {
+    async runOnRequest(page, request): Promise<any> {
         const allowedCookies = this.getConfiguration().allowed;
 
         try {
