@@ -12,6 +12,8 @@ import { Configuration } from "../Puppeteer/Configuration";
 import { GoogleAnalyticsAnonymizeIp } from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsAnonymizeIp";
 import { GoogleAnalyticsId } from "../Modules/Tests/GoogleAnalytics/GoogleAnalyticsId";
 import { JavaScriptErrors } from "../Modules/Tests/Errors/JavaScriptErrors";
+import { FailedRequest } from "../Modules/Tests/Errors/FailedRequest";
+import { FailedResponse } from "../Modules/Tests/Errors/FailedResponse";
 import { GoogleTagManagerId } from "../Modules/Tests/GoogleTagManager/GoogleTagManagerId";
 import { ValidPageTitle } from "../Modules/Tests/Seo/ValidPageTitle";
 
@@ -61,6 +63,8 @@ export function handler(argv) {
     new GoogleAnalyticsId(configuration),
     new GoogleTagManagerId(configuration),
     new JavaScriptErrors(configuration),
+    new FailedRequest(configuration),
+    new FailedResponse(configuration),
     new ValidPageTitle(configuration)
   ];
 
@@ -90,6 +94,22 @@ export function handler(argv) {
               request.continue();
             });
           }
+        });
+
+        page.on("requestfailed", request => {
+            Promise.all(
+              activeTests.map(test => {
+                test.runOnRequestFailed(page, request);
+              })
+            );
+        });
+
+        page.on("response", response => {
+            Promise.all(
+              activeTests.map(test => {
+                test.runOnResponse(page, response);
+              })
+            );
         });
 
         page.on("pageerror", error => {
