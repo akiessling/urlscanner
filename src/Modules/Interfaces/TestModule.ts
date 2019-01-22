@@ -1,6 +1,8 @@
 export interface TestModule {
     configurationPath: string;
 
+    errorCount:number;
+
     isEnabled(): boolean;
     getConfiguration(): {};
     getResults(): Object;

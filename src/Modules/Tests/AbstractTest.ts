@@ -4,8 +4,9 @@ import * as _ from "lodash";
 export abstract class AbstractTest implements TestModule {
     public readonly configurationPath: string = 'needs_implementation';
     public readonly resultPath: string  = 'needs_implementation';
+    public errorCount: number = 0;
 
-    protected readonly crawlingResults: {};
+    private readonly crawlingResults: {};
 
     constructor(public configuration) {
         this.crawlingResults = {};
@@ -30,9 +31,15 @@ export abstract class AbstractTest implements TestModule {
         };
     }
 
-    addResult(group, message) {
+    addResult(group, message, markAsError = true) {
         this.crawlingResults[group] = this.crawlingResults[group] || [];
-        this.crawlingResults[group].push(message);
+        if (!this.crawlingResults[group].includes(message)) {
+            if (markAsError) {
+                this.errorCount++;
+            }
+
+            this.crawlingResults[group].push(message);
+        }
     }
 
     async runBeforeCrawling() {}

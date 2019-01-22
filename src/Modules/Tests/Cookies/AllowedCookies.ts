@@ -19,12 +19,7 @@ export class AllowedCookies extends AbstractTest {
                 cookies.forEach((cookie) => {
                     if (!_.includes(allowedCookies, cookie.name)) {
 
-                        this.crawlingResults[cookie.name] = this.crawlingResults[cookie.name] || [];
-
-                        if (!_.includes(this.crawlingResults[cookie.name], page.url())) {
-                            this.crawlingResults[cookie.name].push(page.url());
-                        }
-
+                        this.addResult(cookie.name, page.url());
                     }
                 });
             }

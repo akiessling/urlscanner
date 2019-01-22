@@ -16,6 +16,7 @@ import { FailedRequest } from "../Modules/Tests/Errors/FailedRequest";
 import { FailedResponse } from "../Modules/Tests/Errors/FailedResponse";
 import { GoogleTagManagerId } from "../Modules/Tests/GoogleTagManager/GoogleTagManagerId";
 import { ValidPageTitle } from "../Modules/Tests/Seo/ValidPageTitle";
+import { ExitCode } from "../Modules/Scanner/ExitCode";
 
 export const command: string = "run [-c configuration.yaml] [-o results.yaml]";
 export const desc: string = "Run test with given config file";
@@ -163,9 +164,19 @@ export function handler(argv) {
     let crawlingResults = {
       results: activeTests.map(test => test.getResults())
     };
-    // console.log(crawlingResults);
 
     let yamlOut = yaml.safeDump(crawlingResults);
     fs.writeFileSync(argv.output, yamlOut);
+
+    let totalErrors = activeTests.reduce((sum, test) => sum + test.errorCount, 0);
+
+    if (totalErrors > 0) {
+      console.log(`Total errors: ${totalErrors}`);
+      process.exit(ExitCode.TestsWithErrors);
+    } else {
+      console.log(`No errors found`);
+      process.exit(ExitCode.Ok);
+    }
+
   })();
 }
