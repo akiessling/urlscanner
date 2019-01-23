@@ -13,10 +13,7 @@ export class AllowedExternalRequests extends AbstractTest {
 
         const allowedDomains = _.get(this.getConfiguration(), 'allowed_domains', []) ;
         if (urlToTest.hostname !== origin.hostname && !_.includes(allowedDomains, urlToTest.hostname)) {
-            let resultObject = this.crawlingResults[request.url()] || [];
-            resultObject.push(page.url());
-
-            this.crawlingResults[request.url()] = resultObject;
+            this.addResult(request.url(), page.url());
         }
     }
 }
