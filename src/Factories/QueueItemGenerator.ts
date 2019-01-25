@@ -20,7 +20,6 @@ export class QueueItemGenerator {
     public prepareItems(queueInput: string|object|Array<string|object>) {
         if (_.isString(queueInput)) {
             return this.createQueueItemFromString(queueInput);
-            // queueInput = {url: queueInput};
         }
 
         if (!_.isArray(queueInput)) {
