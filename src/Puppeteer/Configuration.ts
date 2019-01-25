@@ -1,24 +1,25 @@
 import * as _ from "lodash";
-import { Page } from "puppeteer";
+import {QueueItemGenerator} from "../Factories/QueueItemGenerator";
 
 interface ConfigurationInterface {
-  maxDepth? : number,
-  options? : object
+    maxDepth?: number,
+    options?: object
 }
 
 export class Configuration {
-  public configuration: ConfigurationInterface;
-  constructor(public allConfiguration) {
-    this.configuration = _.get(allConfiguration, "crawler", {});
-  }
+    public configuration: ConfigurationInterface;
+    private queueItemFactory: QueueItemGenerator;
 
-  applyOptions(options) {
-    const overrideOptions = _.get(this.configuration, "options", {});
-    Object.assign(options, overrideOptions);
-    return options;
-  }
+    constructor(public allConfiguration) {
+        this.configuration = _.get(allConfiguration, "crawler", {});
+        this.queueItemFactory = new QueueItemGenerator(this.allConfiguration);
+    }
 
-  get maxDepth() {
-    return this.configuration.maxDepth || 0;
-  }
+    public getQueue() {
+        return this.queueItemFactory.getItems();
+    }
+
+    get maxDepth() {
+        return this.configuration.maxDepth || 0;
+    }
 }

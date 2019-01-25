@@ -78,7 +78,11 @@ export function handler(argv) {
   (async () => {
     const crawler = await HCCrawler.launch({
       preRequest(options) {
-        return crawlerConfiguration.applyOptions(options);
+        options = activeTests.map(test => {
+          test.runBeforeCrawling(options);
+        });
+
+        return options;
       },
       customCrawl: async (page: Page, crawl) => {
         // You can access the page object before requests
@@ -150,10 +154,14 @@ export function handler(argv) {
       maxDepth: crawlerConfiguration.maxDepth
     });
 
-    await crawler.queue(configuration.urls);
+    await crawler.queue(crawlerConfiguration.getQueue());
 
     await crawler.onIdle(); // Resolved when no queue is left
     await crawler.close(); // Close the crawler
+
+    activeTests.forEach(test => {
+      test.runAfterCrawling();
+    });
 
     spinner.succeed(
       `Crawling done, saving results for ${totalCrawled} pages to ${
