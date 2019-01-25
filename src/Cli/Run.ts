@@ -77,13 +77,7 @@ export function handler(argv) {
 
   (async () => {
     const crawler = await HCCrawler.launch({
-      preRequest(options) {
-        options = activeTests.map(test => {
-          test.runBeforeCrawling(options);
-        });
 
-        return options;
-      },
       customCrawl: async (page: Page, crawl) => {
         // You can access the page object before requests
         await page.setRequestInterception(true);
@@ -158,10 +152,6 @@ export function handler(argv) {
 
     await crawler.onIdle(); // Resolved when no queue is left
     await crawler.close(); // Close the crawler
-
-    activeTests.forEach(test => {
-      test.runAfterCrawling();
-    });
 
     spinner.succeed(
       `Crawling done, saving results for ${totalCrawled} pages to ${
