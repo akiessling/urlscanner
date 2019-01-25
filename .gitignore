@@ -3,3 +3,4 @@ configuration.yaml
 dist
 results.yaml
 yarn-error.log
+node_modules
