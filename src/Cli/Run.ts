@@ -164,9 +164,9 @@ export function handler(argv) {
             },
 
             maxDepth: configuration.get('crawler.maxDepth')
-        });
+    });
 
-        await crawler.queue(loadedConfiguration.urls);
+    await crawler.queue(configuration.getQueue());
 
         await crawler.onIdle(); // Resolved when no queue is left
         await crawler.close(); // Close the crawler

@@ -1,5 +1,6 @@
 import { TestModule } from "../Interfaces/TestModule";
 import { Configuration } from "../../Puppeteer/Configuration";
+import * as _ from "lodash";
 
 export abstract class AbstractTest implements TestModule {
     public readonly configurationPath: string = 'needs_implementation';
@@ -52,6 +53,6 @@ export abstract class AbstractTest implements TestModule {
     async runOnResponse(page, response) {}
     async runOnPageLoad(page) {}
     async runOnPageError(page, error) {}
-    async runAfterCrawling(page) {}
+    runAfterCrawling() {}
 
 }

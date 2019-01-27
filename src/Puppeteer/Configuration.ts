@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import { QueueItemGenerator } from "../Factories/QueueItemGenerator";
 import { URL } from "url";
 
 interface CrawlerConfigurationInterface {
@@ -29,10 +30,12 @@ export function isUrlTypeUnSupported(input: TypeCheck) {
 
 export class Configuration {
     public readonly crawlerConfiguration: CrawlerConfigurationInterface;
+    private queueItemFactory: QueueItemGenerator;
 
     constructor(private completeConfiguration) {
         let yamlCrawlerConfiguration = _.get(completeConfiguration, "crawler", {});
         this.crawlerConfiguration = _.merge({}, defaultCrawlerConfiguration, yamlCrawlerConfiguration);
+        this.queueItemFactory = new QueueItemGenerator(this.completeConfiguration);
     }
 
     has(path) {
@@ -43,9 +46,7 @@ export class Configuration {
         return _.get(this.completeConfiguration, path, defaultValue);
     }
 
-    applyOptions(options) {
-        const overrideOptions = _.get(this.crawlerConfiguration, "options", {});
-        Object.assign(options, overrideOptions);
-        return options;
+    public getQueue() {
+        return this.queueItemFactory.getItems();
     }
 }

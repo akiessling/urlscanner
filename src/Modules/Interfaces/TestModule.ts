@@ -12,6 +12,6 @@ export interface TestModule {
     runOnResponse(page, response): void;
     runOnPageLoad(page): void;
     runOnPageError(page, error): void;
-    runAfterCrawling(page): void;
+    runAfterCrawling(): void;
 
 }
