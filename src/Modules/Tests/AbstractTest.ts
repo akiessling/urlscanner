@@ -44,7 +44,9 @@ export abstract class AbstractTest implements TestModule {
         }
     }
 
-    async runBeforeCrawling() {}
+    runBeforeCrawling(options) {
+        return options;
+    }
     async runOnRequest(page, request) {}
     async runOnRequestFailed(page, request) {}
     async runOnResponse(page, response) {}

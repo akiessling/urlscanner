@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import { URL } from "url";
 
 interface CrawlerConfigurationInterface {
     maxDepth?: number,
@@ -12,6 +13,19 @@ const defaultCrawlerConfiguration: CrawlerConfigurationInterface =
         options: {},
         resultLimit: 5
     };
+
+interface TypeCheck {
+    url?: string
+}
+
+const unsupportedMediaTypes = [
+    'pdf', 'mp4', 'mp3', 'ogg', 'webm'
+];
+
+export function isUrlTypeUnSupported(input: TypeCheck) {
+    let path = new URL(input.url).pathname;
+    return unsupportedMediaTypes.some(type => path.endsWith(`.${type}`));
+}
 
 export class Configuration {
     public readonly crawlerConfiguration: CrawlerConfigurationInterface;
