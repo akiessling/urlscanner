@@ -4,7 +4,7 @@ export interface TestModule {
     errorCount:number;
 
     isEnabled(): boolean;
-    getConfiguration(): {};
+    getModuleConfiguration(): {};
     getResults(): Object;
     runBeforeCrawling(): void;
     runOnRequest(page, request): void;

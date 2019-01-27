@@ -13,7 +13,7 @@ export class GoogleTagManagerId extends AbstractTest {
         if (this.urlCondition.test(request.url())) {
             const urlToTest = new URLParse(request.url(), true);
 
-            const validTagManagerIds = this.getConfiguration('validIds');
+            const validTagManagerIds = this.getModuleConfiguration('validIds');
             let actualTagManagerId = _.get(urlToTest, "query.id");
 
             // check for correct analytics-id

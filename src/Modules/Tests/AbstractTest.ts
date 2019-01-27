@@ -16,7 +16,7 @@ export abstract class AbstractTest implements TestModule {
         return this.configuration.has(this.configurationPath);
     }
 
-    getConfiguration(path?: string, defaultValue?: any) {
+    getModuleConfiguration(path?: string, defaultValue?: any) {
         let targetPath = this.configurationPath;
         if (path) {
             targetPath = this.configurationPath + '.' + path;
