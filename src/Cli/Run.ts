@@ -147,7 +147,7 @@ export function handler(argv) {
         console.log(error);
       },
 
-      maxDepth: configuration.maxDepth
+      maxDepth: configuration.get('crawler.maxDepth')
     });
 
     await crawler.queue(loadedConfiguration.urls);

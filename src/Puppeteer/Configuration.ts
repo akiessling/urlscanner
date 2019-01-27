@@ -21,10 +21,6 @@ export class Configuration {
         this.crawlerConfiguration = _.merge({}, defaultCrawlerConfiguration, yamlCrawlerConfiguration);
     }
 
-    get maxDepth() {
-        return this.crawlerConfiguration.maxDepth || 0;
-    }
-
     has(path) {
         return _.has(this.completeConfiguration, path);
     }
