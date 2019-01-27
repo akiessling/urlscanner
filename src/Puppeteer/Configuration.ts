@@ -14,7 +14,7 @@ const defaultCrawlerConfiguration: CrawlerConfigurationInterface =
     };
 
 export class Configuration {
-    public crawlerConfiguration: CrawlerConfigurationInterface;
+    public readonly crawlerConfiguration: CrawlerConfigurationInterface;
 
     constructor(public completeConfiguration) {
         let yamlCrawlerConfiguration = _.get(completeConfiguration, "crawler", {});

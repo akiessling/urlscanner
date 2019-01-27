@@ -38,7 +38,9 @@ export abstract class AbstractTest implements TestModule {
                 this.errorCount++;
             }
 
-            this.crawlingResults[group].push(message);
+            if (this.crawlingResults[group].length < this.configuration.crawlerConfiguration.resultLimit) {
+                this.crawlingResults[group].push(message);
+            }
         }
     }
 
