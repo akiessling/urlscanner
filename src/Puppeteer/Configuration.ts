@@ -16,7 +16,7 @@ const defaultCrawlerConfiguration: CrawlerConfigurationInterface =
 export class Configuration {
     public readonly crawlerConfiguration: CrawlerConfigurationInterface;
 
-    constructor(public completeConfiguration) {
+    constructor(private completeConfiguration) {
         let yamlCrawlerConfiguration = _.get(completeConfiguration, "crawler", {});
         this.crawlerConfiguration = _.merge({}, defaultCrawlerConfiguration, yamlCrawlerConfiguration);
     }

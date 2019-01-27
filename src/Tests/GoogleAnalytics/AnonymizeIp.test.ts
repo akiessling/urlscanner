@@ -3,9 +3,7 @@ import {GoogleAnalyticsAnonymizeIp} from "../../Modules/Tests/GoogleAnalytics/Go
 import { Configuration } from "../../Puppeteer/Configuration";
 
 test('detect missing anonymize param', t => {
-
-    let configuration = {};
-    let testConfiguration = new Configuration(configuration);
+    let testConfiguration = new Configuration({});
     let externalRequest = new GoogleAnalyticsAnonymizeIp(testConfiguration);
 
     const pageUrl = 'http://example.org/';
@@ -37,9 +35,7 @@ test('detect missing anonymize param', t => {
 });
 
 test('detect wrong anonymize parameter', t => {
-
-    let configuration = {};
-    let testConfiguration = new Configuration(configuration);
+    let testConfiguration = new Configuration({});
     let externalRequest = new GoogleAnalyticsAnonymizeIp(testConfiguration);
 
     const pageUrl = 'http://example.org/';

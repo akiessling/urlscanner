@@ -3,9 +3,7 @@ import { AllowedExternalRequests } from "../../Modules/Tests/NetworkTraffic/Allo
 import { Configuration } from "../../Puppeteer/Configuration";
 
 test('valid request', t => {
-
-    let configuration = {};
-    let testConfiguration = new Configuration(configuration);
+    let testConfiguration = new Configuration({});
     let externalRequest = new AllowedExternalRequests(testConfiguration);
 
     let page = {
