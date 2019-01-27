@@ -1,10 +1,12 @@
 import test from "ava";
 import {GoogleAnalyticsAnonymizeIp} from "../../Modules/Tests/GoogleAnalytics/GoogleAnalyticsAnonymizeIp";
+import { Configuration } from "../../Puppeteer/Configuration";
 
 test('detect missing anonymize param', t => {
 
     let configuration = {};
-    let externalRequest = new GoogleAnalyticsAnonymizeIp(configuration);
+    let testConfiguration = new Configuration(configuration);
+    let externalRequest = new GoogleAnalyticsAnonymizeIp(testConfiguration);
 
     const pageUrl = 'http://example.org/';
 
@@ -37,7 +39,8 @@ test('detect missing anonymize param', t => {
 test('detect wrong anonymize parameter', t => {
 
     let configuration = {};
-    let externalRequest = new GoogleAnalyticsAnonymizeIp(configuration);
+    let testConfiguration = new Configuration(configuration);
+    let externalRequest = new GoogleAnalyticsAnonymizeIp(testConfiguration);
 
     const pageUrl = 'http://example.org/';
 
@@ -70,7 +73,8 @@ test('detect wrong anonymize parameter', t => {
 test('detect proper anonymize parameter', t => {
 
     let configuration = {};
-    let externalRequest = new GoogleAnalyticsAnonymizeIp(configuration);
+    let testConfiguration = new Configuration(configuration);
+    let externalRequest = new GoogleAnalyticsAnonymizeIp(testConfiguration);
 
     const pageUrl = 'http://example.org/';
 

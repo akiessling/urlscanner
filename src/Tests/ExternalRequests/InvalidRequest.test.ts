@@ -1,12 +1,14 @@
 import test from "ava";
 import { AllowedExternalRequests } from "../../Modules/Tests/NetworkTraffic/AllowedExternalRequests";
+import { Configuration } from "../../Puppeteer/Configuration";
 
 test('invalid external request', t => {
 
     let configuration = {
         'allowed_domains': 'foo3.baz'
     };
-    let externalRequest = new AllowedExternalRequests(configuration);
+    let testConfiguration = new Configuration(configuration);
+    let externalRequest = new AllowedExternalRequests(testConfiguration);
 
     const pageUrl = 'https://foo.bar';
 

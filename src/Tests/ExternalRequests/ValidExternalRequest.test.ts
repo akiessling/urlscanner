@@ -1,5 +1,6 @@
 import test from "ava";
 import { AllowedExternalRequests } from "../../Modules/Tests/NetworkTraffic/AllowedExternalRequests";
+import { Configuration } from "../../Puppeteer/Configuration";
 
 test('valid external request', t => {
 
@@ -10,7 +11,9 @@ test('valid external request', t => {
             }
         }
     };
-    let externalRequest = new AllowedExternalRequests(configuration);
+    let testConfiguration = new Configuration(configuration);
+
+    let externalRequest = new AllowedExternalRequests(testConfiguration);
 
     const pageUrl = 'https://foo.bar';
 

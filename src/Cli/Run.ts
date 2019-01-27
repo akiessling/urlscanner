@@ -54,8 +54,8 @@ function getConfiguration(argv) {
 export function handler(argv) {
   let totalCrawled = 0;
 
-  const configuration = getConfiguration(argv);
-  const crawlerConfiguration = new Configuration(configuration);
+  const loadedConfiguration = getConfiguration(argv);
+  const configuration = new Configuration(loadedConfiguration);
 
   const allTests: TestModule[] = [
     new AllowedExternalRequests(configuration),
@@ -78,7 +78,7 @@ export function handler(argv) {
   (async () => {
     const crawler = await HCCrawler.launch({
       preRequest(options) {
-        return crawlerConfiguration.applyOptions(options);
+        return configuration.applyOptions(options);
       },
       customCrawl: async (page: Page, crawl) => {
         // You can access the page object before requests
@@ -147,10 +147,10 @@ export function handler(argv) {
         console.log(error);
       },
 
-      maxDepth: crawlerConfiguration.maxDepth
+      maxDepth: configuration.maxDepth
     });
 
-    await crawler.queue(configuration.urls);
+    await crawler.queue(loadedConfiguration.urls);
 
     await crawler.onIdle(); // Resolved when no queue is left
     await crawler.close(); // Close the crawler

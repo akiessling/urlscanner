@@ -1,5 +1,6 @@
 import test from "ava";
 import {ValidPageTitle} from "../../Modules/Tests/Seo/ValidPageTitle";
+import { Configuration } from "../../Puppeteer/Configuration";
 
 test('Detect empty page title', async t => {
     const page = {
@@ -13,7 +14,7 @@ test('Detect empty page title', async t => {
         }
     };
 
-    const test = new ValidPageTitle({});
+    const test = new ValidPageTitle(new Configuration({}));
     await test.runOnPageLoad(page);
     const result = test.getResults();
 

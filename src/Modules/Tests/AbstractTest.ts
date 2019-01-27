@@ -1,19 +1,19 @@
-import {TestModule} from "../Interfaces/TestModule";
-import * as _ from "lodash";
+import { TestModule } from "../Interfaces/TestModule";
+import { Configuration } from "../../Puppeteer/Configuration";
 
 export abstract class AbstractTest implements TestModule {
     public readonly configurationPath: string = 'needs_implementation';
-    public readonly resultPath: string  = 'needs_implementation';
+    public readonly resultPath: string = 'needs_implementation';
     public errorCount: number = 0;
 
     private readonly crawlingResults: {};
 
-    constructor(public configuration) {
+    constructor(private configuration: Configuration) {
         this.crawlingResults = {};
     }
 
     isEnabled(): boolean {
-        return _.has(this.configuration, this.configurationPath);
+        return this.configuration.has(this.configurationPath);
     }
 
     getConfiguration(path?: string, defaultValue?: any) {
@@ -22,7 +22,7 @@ export abstract class AbstractTest implements TestModule {
             targetPath = this.configurationPath + '.' + path;
         }
 
-        return _.get(this.configuration, targetPath, defaultValue);
+        return this.configuration.get(targetPath, defaultValue);
     }
 
     getResults(): Object {
@@ -42,12 +42,25 @@ export abstract class AbstractTest implements TestModule {
         }
     }
 
-    async runBeforeCrawling() {}
-    async runOnRequest(page, request) {}
-    async runOnRequestFailed(page, request) {}
-    async runOnResponse(page, response) {}
-    async runOnPageLoad(page) {}
-    async runOnPageError(page, error) {}
-    async runAfterCrawling(page) {}
+    async runBeforeCrawling() {
+    }
+
+    async runOnRequest(page, request) {
+    }
+
+    async runOnRequestFailed(page, request) {
+    }
+
+    async runOnResponse(page, response) {
+    }
+
+    async runOnPageLoad(page) {
+    }
+
+    async runOnPageError(page, error) {
+    }
+
+    async runAfterCrawling(page) {
+    }
 
 }

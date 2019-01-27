@@ -1,5 +1,6 @@
 import test from "ava";
 import {GoogleAnalyticsId} from "../../Modules/Tests/GoogleAnalytics/GoogleAnalyticsId";
+import { Configuration } from "../../Puppeteer/Configuration";
 
 test('detect wrong Google Analytics ID', t => {
 
@@ -10,7 +11,8 @@ test('detect wrong Google Analytics ID', t => {
             }
         }
     };
-    let tester = new GoogleAnalyticsId(configuration);
+    let testConfiguration = new Configuration(configuration);
+    let tester = new GoogleAnalyticsId(testConfiguration);
 
     const pageUrl = 'http://example.org/';
 
@@ -49,7 +51,8 @@ test('detect proper Google Analytics ID', t => {
             }
         }
     };
-    let tester = new GoogleAnalyticsId(configuration);
+    let testConfiguration = new Configuration(configuration);
+    let tester = new GoogleAnalyticsId(testConfiguration);
 
     const pageUrl = 'http://example.org/';
 

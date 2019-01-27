@@ -1,24 +1,41 @@
 import * as _ from "lodash";
-import { Page } from "puppeteer";
 
 interface CrawlerConfigurationInterface {
-  maxDepth? : number,
-  options? : object
+    maxDepth?: number,
+    options?: object,
+    resultLimit?: number
 }
 
+const defaultCrawlerConfiguration: CrawlerConfigurationInterface =
+    {
+        maxDepth: 0,
+        options: {},
+        resultLimit: 5
+    };
+
 export class Configuration {
-  public crawlerConfiguration: CrawlerConfigurationInterface;
-  constructor(public allConfiguration) {
-    this.crawlerConfiguration = _.get(allConfiguration, "crawler", {});
-  }
+    public crawlerConfiguration: CrawlerConfigurationInterface;
 
-  applyOptions(options) {
-    const overrideOptions = _.get(this.crawlerConfiguration, "options", {});
-    Object.assign(options, overrideOptions);
-    return options;
-  }
+    constructor(public completeConfiguration) {
+        let yamlCrawlerConfiguration = _.get(completeConfiguration, "crawler", {});
+        this.crawlerConfiguration = _.merge({}, defaultCrawlerConfiguration, yamlCrawlerConfiguration);
+    }
 
-  get maxDepth() {
-    return this.crawlerConfiguration.maxDepth || 0;
-  }
+    get maxDepth() {
+        return this.crawlerConfiguration.maxDepth || 0;
+    }
+
+    has(path) {
+        return _.has(this.completeConfiguration, path);
+    }
+
+    get(path, defaultValue = null) {
+        return _.get(this.completeConfiguration, path, defaultValue);
+    }
+
+    applyOptions(options) {
+        const overrideOptions = _.get(this.crawlerConfiguration, "options", {});
+        Object.assign(options, overrideOptions);
+        return options;
+    }
 }
