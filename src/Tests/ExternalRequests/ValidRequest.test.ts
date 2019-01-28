@@ -1,10 +1,10 @@
 import test from "ava";
 import { AllowedExternalRequests } from "../../Modules/Tests/NetworkTraffic/AllowedExternalRequests";
+import { Configuration } from "../../Puppeteer/Configuration";
 
 test('valid request', t => {
-
-    let configuration = {};
-    let externalRequest = new AllowedExternalRequests(configuration);
+    let testConfiguration = new Configuration({});
+    let externalRequest = new AllowedExternalRequests(testConfiguration);
 
     let page = {
         url() {

@@ -9,7 +9,7 @@ export class AllowedCookies extends AbstractTest {
     public readonly resultPath: string  = 'cookies';
 
     async runOnRequest(page, request): Promise<any> {
-        const allowedCookies = this.getConfiguration().allowed;
+        const allowedCookies = this.getModuleConfiguration('allowed', []);
 
         try {
             let result = await page._client.send('Network.getAllCookies');

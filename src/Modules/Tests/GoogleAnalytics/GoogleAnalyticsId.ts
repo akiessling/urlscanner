@@ -8,7 +8,7 @@ export class GoogleAnalyticsId extends AbstractGoogleAnalytics {
         if (this.urlCondition.test(request.url())) {
             const urlToTest = new URLParse(request.url(), true);
 
-            const validAnalyticsIds = this.getConfiguration('validIds');
+            const validAnalyticsIds = this.getModuleConfiguration('validIds');
             let actualAnalyticsId = _.get(urlToTest, "query.tid");
 
             // check for correct analytics-id

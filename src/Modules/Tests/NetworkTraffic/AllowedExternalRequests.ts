@@ -11,7 +11,7 @@ export class AllowedExternalRequests extends AbstractTest {
         let urlToTest:Url = new Url(request.url());
         let origin:Url = new Url(page.url());
 
-        const allowedDomains = _.get(this.getConfiguration(), 'allowed_domains', []) ;
+        const allowedDomains = _.get(this.getModuleConfiguration(), 'allowed_domains', []) ;
         if (urlToTest.hostname !== origin.hostname && !_.includes(allowedDomains, urlToTest.hostname)) {
             this.addResult(request.url(), page.url());
         }
