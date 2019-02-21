@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - 'node'
+  - '10'
+  
+sudo: false
+
+matrix:
+  fast_finish: true
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    
+install:
+  - npm install
+script:
+  - npm run test
