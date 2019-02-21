@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/akiessling/urlscanner.svg?branch=master)](https://travis-ci.org/akiessling/urlscanner)
+
 # Usage
 
 ## Development
