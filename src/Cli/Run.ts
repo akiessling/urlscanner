@@ -78,6 +78,14 @@ export function handler(argv) {
     (async () => {
         const crawler = await HCCrawler.launch({
 
+            // ignore ssl errors, see https://github.com/GoogleChrome/puppeteer/issues/1159
+            args: [
+                '--enable-features=NetworkService',
+            ],
+            ignoreHTTPSErrors: true,
+            headless: true,
+
+
             preRequest(options) {
                 // e.g. if pdf is inserted as iframe
                 if (isUrlTypeUnSupported({url: options.url})) {
@@ -164,7 +172,7 @@ export function handler(argv) {
             },
 
             maxDepth: configuration.get('crawler.maxDepth')
-    });
+    }).catch((error) => {console.log(error)});
 
     await crawler.queue(configuration.getQueue());
 
